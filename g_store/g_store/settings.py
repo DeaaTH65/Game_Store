@@ -73,7 +73,7 @@ DATABASES = {
    }
 }
 
-
+AUTH_USER_MODEL = 'base.CustomUser'
 
 
 # Password validation
