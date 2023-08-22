@@ -1,3 +1,39 @@
 body {
-    background-color: darkgrey;
+    font-family: "Open Sans", sans-serif;
+    color: #444444;
+    width: 100%;
+    height: 100vh;
+    background: url("../images/background.jpg") top center;
+    background-size: cover;
+    position: relative;
 }
+
+a {
+  color: #e43c5c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ea6981;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nunito", sans-serif;
+}
+
+a.navbar-brand {
+    color: #e43c5c;
+    text-decoration: none;
+}
+
+a.navbar-brand:hover {
+    color: #ea6981;
+    text-decoration: none;
+}
+
