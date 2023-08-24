@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 
 
@@ -28,7 +30,11 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=30)
-    phone = models.IntegerField
+    phone = models.CharField(max_length=10, null=True, blank=True)
+    picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    social = models.URLField(max_length=100, null=True, blank=True)
+    updated = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -39,3 +45,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.name
+    
