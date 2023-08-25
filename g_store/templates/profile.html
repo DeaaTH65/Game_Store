@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} Profile {% endblock title %}
+
+{% block content %}
+{% load static %}
+<br/>
+<div class="container">
+    <h1 align="center" class="bg-primary"> Profile </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 card bg-danger">
+            <div class="card">
+                <div class="card-body bg-info">
+                    {% if user.picture %}
+                        <img src="{{ user.picture.url }}" alt="profile picture" class="card-img-top" height="500" />
+                    {% else %}
+                        <img src="{% static 'images/default_pic.png' %}" class="card-img-top" height="500" />
+                    {% endif %}
+                </div>
+            </div>
+            </div>
+
+            <div class="col-sm-6 card text-dark bg-danger">
+                <br/>
+                <div class="card text-black bg-light mb-3">
+                    <div class="card-header bg-secondary"><h3>{{user.name}}</h3></div>
+                    <div class="card-body">
+                    <h5 class="card-title">{{user.email}}</h5>
+                    <hr/>
+                    <p><button class="btn btn-info">Phone: {{ user.phone }}</button></p>                               
+                    </div>
+                    <div class="card-body bg-primary"><p>Social: {{ user.social }}</p></div>
+                </div>          
+                <p>Updates : {{ user.updated|timesince }} </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
