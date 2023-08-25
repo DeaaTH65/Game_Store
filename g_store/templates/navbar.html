@@ -33,7 +33,12 @@
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         &nbsp; &nbsp;&nbsp;
-        <img src="{% static 'images/default_pic.png' %}" class="rounded" height="40" width="45" />
+        {% if user.picture %}
+          <img src="{{user.picture.url}}" class="rounded" height="40" width="45" />
+        {% else %}
+          <img src="{% static 'images/default_pic.png' %}" class="rounded" height="40" width="45" />
+        {% endif %}
+        
       </div>
     </div>
 </nav>

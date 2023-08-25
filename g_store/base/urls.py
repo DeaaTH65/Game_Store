@@ -1,5 +1,5 @@
 from . import views
-from django.urls import path
+from django.urls import path, include
 
 
 
@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('profile/<str:pk>', views.profile, name='profile'),
+    path('show_product/', include('inventory.urls')),
 ]

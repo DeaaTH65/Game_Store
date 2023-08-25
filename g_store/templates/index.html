@@ -6,16 +6,15 @@ Home
 {% endblock title %}
 
 {% block content %}
-<h1> All Games </h1>
-<br/>
 <div class="container">
+  <h1> All Games </h1>
   {% for product in products %}
   <div class="products">
-    <div class="product" style="max-width: 30rem;">
+    <div class="product">
       <div class="card text-bg-danger">
         <img src="{{product.image.url}}" class="card-img-top" alt="picture of game">
         <div class="card-body">
-          <h5 class="card-title">{{product.name}}</h5>
+          <a class="product" href="{% url 'show_product' product.id %}"><h5 class="card-title" align="center">{{product.name}}</h5></a>
         </div>
       </div>
     </div>

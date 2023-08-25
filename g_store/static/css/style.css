@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  color: #e43c5c;
+  color: #f70532;
   text-decoration: none;
 }
 
@@ -44,6 +44,16 @@ a.navbar-brand:hover {
 }  
 
 .product {
-  height: 400px;
+  height: 200px;
   width: 300px; 
+}
+
+a.product {
+  color: #6a8bcc;
+  text-decoration: none;
+}
+
+a.product:hover {
+  color: #14cdf2;
+  text-decoration: none;
 }
