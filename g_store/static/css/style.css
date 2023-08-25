@@ -36,3 +36,14 @@ a.navbar-brand:hover {
   color: #ea6981;
   text-decoration: none;
 }
+
+.products {
+  display: inline-block;
+  margin-top: 4%;
+  padding: 2px;
+}  
+
+.product {
+  height: 400px;
+  width: 300px; 
+}

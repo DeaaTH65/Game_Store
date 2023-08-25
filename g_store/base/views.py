@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from inventory.models import Product
 
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    products = Product.objects.all().order_by("-id")
+    context = {'products': products}
+    return render(request, 'index.html', context)
 
 
 def login(request):
