@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from inventory.models import Product
+from django.contrib.auth import logout
 
 
 
@@ -12,6 +13,11 @@ def index(request):
 
 def login(request):
     return render(request, 'login.html')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
 
 
 def register(request):
