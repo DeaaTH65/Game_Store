@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from inventory.models import Product
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 
 
 
@@ -11,8 +11,18 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def login(request):
-    return render(request, 'login.html')
+def login_user(request):
+	if request.method == 'POST':
+		email = request.POST['email']
+		password = request.POST['password']
+		user = authenticate(request, email=email, password=password)
+		if user is not None:
+			login(request, user)
+			return redirect('home')
+		else:
+			return redirect('home')
+	else:
+		return render(request, 'login.html')
 
 
 def logout_user(request):

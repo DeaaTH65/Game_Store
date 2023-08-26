@@ -5,7 +5,8 @@
 {% block content %}
 <br/><br/>
 <div class="wrapper">
-    <form action="#">
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
       <h2>Login</h2>
         <div class="input-field">
         <input type="text" name="email" required>
