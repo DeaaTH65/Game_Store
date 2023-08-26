@@ -33,6 +33,8 @@
                     <div class="card-body bg-primary"><p>Social: {{ user.social }}</p></div>
                 </div>          
                 <p>Updates : {{ user.updated|timesince }} </p>
+                <br><br>
+                <a href="{% url 'update_user' %}"><button class="btn btn-primary">Update Profile</button></a>
             </div>
         </div>
     </div>

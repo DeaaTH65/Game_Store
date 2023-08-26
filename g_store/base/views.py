@@ -55,3 +55,7 @@ def register_user(request):
 
 def profile(request, pk):
     return render(request, 'profile.html')
+
+
+def update_user(request):
+    return render(request, 'update_user.html')
