@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product
+from .models import Product, Purchase
 from .forms import PurchaseForm
 
 
@@ -17,7 +17,7 @@ def buy_product(request, pk):
     user = request.user
 
     if request.method == "POST":
-        form = PurchaseForm(request.POST, instance=user)
+        form = PurchaseForm(request.POST)
         if form.is_valid():
             purchase = form.save(commit=False)
             purchase.product = product
@@ -32,3 +32,8 @@ def buy_product(request, pk):
 
     context = {'product': product, 'form': form}
     return render(request, 'buy_product.html', context)
+
+
+def billing(request, purchase_id):
+    purchase = get_object_or_404(Purchase, id=purchase_id)
+    return render(request, 'billing.html', {'purchase': purchase})
