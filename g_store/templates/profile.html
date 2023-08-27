@@ -28,13 +28,13 @@
                     <div class="card-body">
                     <h5 class="card-title">{{user.email}}</h5>
                     <hr/>
-                    <p><button class="btn btn-info">Phone: {{ user.phone }}</button></p>                               
+                    <p><button class="btn btn-info">Phone: {{ user.phone }}</button></p>
                     </div>
                     <div class="card-body bg-primary"><p>Social: {{ user.social }}</p></div>
                 </div>          
                 <p>Updates : {{ user.updated|timesince }} </p>
-                <br><br>
-                <a href="{% url 'update_user' %}"><button class="btn btn-primary">Update Profile</button></a>
+                <br/>
+                <button class="btn btn-info"><a href="{% url 'update' %}">Update</a></button>
             </div>
         </div>
     </div>

@@ -10,5 +10,5 @@ urlpatterns = [
     path('register/', views.register_user, name='register'),
     path('profile/<str:pk>', views.profile, name='profile'),
     path('show_product/', include('inventory.urls')),
-    path('update_user/', views.update_user, name='update_user'),
+    path('update-profile/', views.update_profile, name='update'),
 ]

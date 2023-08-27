@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from inventory.models import Product
 from django.contrib.auth import authenticate, login, logout
-from .forms import SignUpForm
+from .forms import SignUpForm, ProfileUpdateForm
 from django.contrib import messages
+from .models import CustomUser
 
 
 
@@ -57,5 +58,15 @@ def profile(request, pk):
     return render(request, 'profile.html')
 
 
-def update_user(request):
-    return render(request, 'update_user.html')
+def update_profile(request):
+    user = request.user
+
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return render(request, 'profile.html')
+    else:
+        form = ProfileUpdateForm(instance=user)
+
+    return render(request, 'update_profile.html', {'form': form})
