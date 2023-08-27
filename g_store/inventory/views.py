@@ -14,9 +14,10 @@ def show_product(request, pk):
 
 def buy_product(request, pk):
     product = get_object_or_404(Product, id=pk)
+    user = request.user
 
     if request.method == "POST":
-        form = PurchaseForm(request.POST)
+        form = PurchaseForm(request.POST, instance=user)
         if form.is_valid():
             purchase = form.save(commit=False)
             purchase.product = product
@@ -27,7 +28,7 @@ def buy_product(request, pk):
             product.save()
             return redirect('billing', purchase_id=purchase.id)
     else:
-        form = PurchaseForm(initial={'product': product})
+        form = PurchaseForm(initial={'product': product}, instance=user)
 
     context = {'product': product, 'form': form}
     return render(request, 'buy_product.html', context)

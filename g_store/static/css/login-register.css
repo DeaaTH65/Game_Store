@@ -117,3 +117,24 @@ button:hover {
     margin-top: 30px;
     margin-bottom: 10px;
 }
+
+.product_details {
+    width: 1300px;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+}
+
+.wrap {
+    margin: auto;
+    width: 1000px;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+}

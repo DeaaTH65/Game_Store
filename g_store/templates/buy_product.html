@@ -4,31 +4,30 @@
 
 
 {% block content %}
-<h1> Purchase  </h1>
+<h1 align="center"> <button class="btn btn-danger">Purchase {{product.name}}</button> </h1>
 
-<div class="container">
+<div class="wrap">
     <div class="row">
-        <div class="col-sm-4">
-          <div class="card">
+        <div class="col-sm-6">
+          <div class="card bg-danger">
             <div class="card-body">
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" height="400">
                 <div class="card text-black bg-light mb-3">
                     <div class="card-header bg-secondary"><h3>{{ product.name }}</h3></div>
                     <div class="card-body">
                     <p><button class="btn btn-success">Price: Rs.{{ product.price }}</button></p>
-                    <p>Remaining: {{ product.count }}</p>
                     </div>
                 </div> 
             </div>
           </div>
         </div>
 
-        <div class="col-sm-8 card text-dark bg-info">
+        <div class="wrapper bg-danger" >
             <form method="POST" action="">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <br/>
-                <button class="btn btn-primary" type="submit" value="buy">Submit</button>
+                <button type="submit" value="buy">Submit</button>
             </form>
         </div>
     </div>

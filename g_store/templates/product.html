@@ -4,31 +4,34 @@
 
 
 {% block content %}
-<h3 align="center"> Product Details </h3>
+<h1 align="center"> <button class="btn btn-danger">Product Details</button> </h1>
 <div class="container">
-    <div class="row bg-secondary">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" height="400">
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-6 card text-dark bg-light">
-            <br/>
-            <div class="card text-black border-danger mb-3">
-                <div class="card-header bg-danger"><h3>{{ product.name }}</h3></div>
-                <div class="card-body bg-secondary">
-                <h5 class="card-title">Category: {{ product.category }}</h5>
-                <hr/>
-                <p class="card-text">{{ product.description }}</p>
-                <p><button class="btn btn-success">Price: Rs.{{ product.price }}</button></p>
-                <p class="btn btn-warning">Remaining: {{ product.count }}</p>
+    <div class="product_details ">
+        <div class="row bg-secondary">
+            <div class="col-sm-6 bg-danger">
+                <br>
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" height="400">
                 </div>
             </div>
-            <a href="{% url 'buy_product' product.id %}" class="btn btn-primary">Buy <i class="fa-solid fa-cash-register" style="color: #f10404;"></i></a>
-            <br/>
+            </div>
+
+            <div class="col-sm-6 card text-dark bg-danger">
+                <br/>
+                <div class="card text-black border-danger mb-3">
+                    <div class="card-header bg-secondary"><h3>{{ product.name }}</h3></div>
+                    <div class="card-body bg-secondary">
+                    <h5 class="card-title">Category: {{ product.category }}</h5>
+                    <hr/>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p><button class="btn btn-success">Price: Rs.{{ product.price }}</button></p>
+                    <p class="btn btn-warning">Remaining: {{ product.count }}</p>
+                    </div>
+                </div>
+                <a href="{% url 'buy_product' product.id %}" class="btn btn-primary">Buy <i class="fa-solid fa-cash-register" style="color: #f10404;"></i></a>
+                <br/>
+            </div>
         </div>
     </div>
 </div>
