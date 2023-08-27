@@ -27,7 +27,7 @@
                 <p class="btn btn-warning">Remaining: {{ product.count }}</p>
                 </div>
             </div>
-            <a href="" class="btn btn-primary">Buy <i class="fa-solid fa-cash-register" style="color: #f10404;"></i></a>
+            <a href="{% url 'buy_product' product.id %}" class="btn btn-primary">Buy <i class="fa-solid fa-cash-register" style="color: #f10404;"></i></a>
             <br/>
         </div>
     </div>
