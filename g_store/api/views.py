@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ProductSerializer, UserSerializer
-from inventory.models import Product
+from .serializers import ProductSerializer, UserSerializer, PurchaseSerializer
+from inventory.models import Product, Purchase
 from base.models import CustomUser
 
 
@@ -48,4 +48,18 @@ def getUsers(request):
 def getUser(request, pk):
     user = CustomUser.objects.get(id=pk)
     serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getPurchases(request):
+    purchases = Purchase.objects.all()
+    serializer = PurchaseSerializer(purchases, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getPurchase(request, pk):
+    purchase = Purchase.objects.get(id=pk)
+    serializer = PurchaseSerializer(purchase, many=False)
     return Response(serializer.data)
