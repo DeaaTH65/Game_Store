@@ -4,6 +4,11 @@ from .serializers import ProductSerializer, UserSerializer, PurchaseSerializer
 from inventory.models import Product, Purchase
 from base.models import CustomUser
 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 
 # Create your views here.
@@ -63,3 +68,20 @@ def getPurchase(request, pk):
     purchase = Purchase.objects.get(id=pk)
     serializer = PurchaseSerializer(purchase, many=False)
     return Response(serializer.data)
+
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        # ...
+
+        return token
+    
+    
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
