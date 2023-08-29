@@ -71,13 +71,14 @@ def getPurchase(request, pk):
 
 
 
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
 
         # Add custom claims
-        token['username'] = user.username
+        token['email'] = user.email
         # ...
 
         return token
@@ -85,3 +86,15 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+    
+    
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def postProduct(request):
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
