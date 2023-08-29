@@ -1,7 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, UserSerializer
 from inventory.models import Product
+from base.models import CustomUser
 
 
 
@@ -33,4 +34,18 @@ def getProducts(request):
 def getProduct(request, pk):
     room = Product.objects.get(id=pk)
     serializer = ProductSerializer(room, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getUsers(request):
+    users = CustomUser.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getUser(request, pk):
+    user = CustomUser.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
