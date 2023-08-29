@@ -21,4 +21,7 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
     path('add_products/', views.postProduct),
+    path('login/', views.userlogin),
+    path('logout/', views.userlogout),
+    path('products/<str:pk>/buy/', views.buyproduct),
 ]

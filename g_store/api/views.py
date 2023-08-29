@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ProductSerializer, UserSerializer, PurchaseSerializer
+from .serializers import ProductSerializer, UserSerializer, PurchaseSerializer, BuySerializer
 from inventory.models import Product, Purchase
 from base.models import CustomUser
 
@@ -8,6 +8,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+from django.contrib.auth import authenticate, login, logout
+from rest_framework import status
 
 
 
@@ -24,6 +27,10 @@ def getRoutes(request):
         'GET /api/profiles/:id',
         'GET /api/purchases',
         'GET /api/purchases/:id',
+        
+        'POST /api/add_products',
+        'POST /api/login',
+        'POST /api/logout',
     ]
     return Response(routes)
 
@@ -98,3 +105,49 @@ def postProduct(request):
         serializer.save()
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
+
+
+@api_view(['POST'])
+def userlogin(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        password = serializer.validated_data['password']
+
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return Response({"message": "Login successful."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Invalid credentials."}, status=status.HTTP_401_UNAUTHORIZED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def userlogout(request):
+    logout(request)
+    return Response({"message": "Logged out successfully."}, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes(['IsAuthenticated'])
+def buyproduct(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"message": "Product not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "POST":
+        serializer = BuySerializer(data=request.data)
+        if serializer.is_valid():
+            purchase = serializer.save(product=product, user=request.user)
+            purchase.total_amount = product.price * purchase.quantity
+            purchase.save()
+
+            product.count -= purchase.quantity
+            product.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

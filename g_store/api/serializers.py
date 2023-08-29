@@ -19,3 +19,9 @@ class PurchaseSerializer(ModelSerializer):
     class Meta:
         model = Purchase
         fields = '__all__'
+        
+        
+class BuySerializer(ModelSerializer):
+    class Meta:
+        model = Purchase
+        exclude = ['user', 'total_amount']
