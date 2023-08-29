@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'base',
     'inventory',
     'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
