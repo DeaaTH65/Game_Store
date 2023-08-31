@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile/<str:pk>', views.profile, name='profile'),
     path('show_product/', include('inventory.urls')),
     path('update-profile/', views.update_profile, name='update'),
+    path('search/', include('inventory.urls')),
 ]

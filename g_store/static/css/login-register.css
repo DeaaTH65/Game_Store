@@ -130,11 +130,18 @@ button:hover {
 
 .wrap {
     margin: auto;
-    width: 1000px;
+    max-width: 1000px;
+    width: 90%; 
     border-radius: 8px;
     padding: 30px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(9px);
     -webkit-backdrop-filter: blur(9px);
+}
+
+@media (max-width: 768px) {
+    .wrap {
+        padding: 20px; 
+    }
 }

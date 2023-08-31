@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm, ProfileUpdateForm
 from django.contrib import messages
 from .models import CustomUser
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -11,6 +12,8 @@ from .models import CustomUser
 def index(request):
     products = Product.objects.all().order_by("-id")
     context = {'products': products}
+    
+            
     return render(request, 'index.html', context)
 
 
@@ -30,6 +33,7 @@ def login_user(request):
         return render(request, 'login.html')
 
 
+@login_required(login_url='login')
 def logout_user(request):
     logout(request)
     messages.success(request, ("You have been logged out.!"))
@@ -54,10 +58,12 @@ def register_user(request):
     return render(request, 'register.html', {'form':form})
 
 
+@login_required(login_url='login')
 def profile(request, pk):
     return render(request, 'profile.html')
 
 
+@login_required(login_url='login')
 def update_profile(request):
     user = request.user
 

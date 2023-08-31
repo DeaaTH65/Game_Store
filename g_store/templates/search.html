@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+<br/>
+<div class="wrapper">
+  <h2>Search Game</h2>
+  <form  method=POST>
+  {% csrf_token %}
+  <input type="input" class="form-control"  placeholder="Search Games" name="search">
+  <br/><br/>
+    <button type="submit" class="btn btn-secondary">Search</button>
+  </form>
+</div>
+<br/><br/>
+
+{% if search %}
+<div class="wrap">
+<h2>You Searched For: {{ search }}</h2>
+{% for product in searched %}
+<div class="products">
+  <div class="product">
+    <div class="card text-bg-danger">
+      <img src="{{product.image.url}}" class="card-img-top" alt="picture of game">
+      <div class="card-body">
+        <a class="product" href="{% url 'show_product' product.id %}"><h5 class="card-title" align="center">{{product.name}}</h5></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+</div>
+
+{% endblock %}
